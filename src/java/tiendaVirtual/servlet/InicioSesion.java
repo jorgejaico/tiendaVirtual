@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +20,7 @@ import tiendaVirtual.modelo.Consultas;
  *
  * @author 93186.joan23
  */
-@WebServlet(name = "Validacion", urlPatterns = {"/Autenticacion"})
-public class Validacion extends HttpServlet {
+public class InicioSesion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,13 +35,18 @@ public class Validacion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-       
-        String user = request.getParameter("mail");
-        String pass = request.getParameter("pass");
+        PrintWriter out = response.getWriter();
+      
+        String correo = request.getParameter("correo");
+        String contraseña = request.getParameter("pass");
         
-       Consultas con = new Consultas();
-       
-      System.out.println( con.Autenticacion(user, pass));
+        Consultas co = new Consultas();
+        
+        if(co.Autenticacion(correo, contraseña)){
+            response.sendRedirect("menu.jsp");
+        }else {
+            response.sendRedirect("index.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,7 +64,7 @@ public class Validacion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,7 +82,7 @@ public class Validacion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Validacion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

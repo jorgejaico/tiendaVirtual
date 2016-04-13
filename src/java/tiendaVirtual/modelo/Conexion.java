@@ -5,9 +5,10 @@
  */
 package tiendaVirtual.modelo;
 
+
+
+import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.DriverManager;
-import com.mysql.jdbc.Connection;
 import java.sql.SQLException;
 
 /**
@@ -17,15 +18,14 @@ import java.sql.SQLException;
 public class Conexion
 {
     
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "";
-    public static final String HOST = "localhost";
-    public static final String PORT = "3306";
-    public static final String DATABASE = "bd_tienda";
-    public static final String CLASSNAME = "com.mysql.jdbc.Driver";
-    public static final String URL = "jdbc:mysql://"+ HOST +":"+PORT+"/"+DATABASE;
-    
-     public java.sql.Connection con;
+    private String USERNAME = "root";
+    private String PASSWORD = "";
+    private String HOST = "localhost";
+    private String PORT = "3306";
+    private String DATABASE = "bd_tienda";
+    private String CLASSNAME = "com.mysql.jdbc.Driver";
+    private String URL = "jdbc:mysql://"+ HOST +":"+PORT+"/"+DATABASE;
+    private Connection con;
      
        public Conexion() {
   
@@ -38,6 +38,8 @@ public class Conexion
             System.out.println("Error");
         }
 }
-       
+       public Connection getConexion(){
+           return con;
+       }
        
 }

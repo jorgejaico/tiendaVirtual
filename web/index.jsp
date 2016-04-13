@@ -37,7 +37,7 @@
         <div id="signup">   
           <h1>Registrate</h1>
           
-          <form action="Autenticacion" method="post">
+          <form action="nuevousuario" method="post">
           
           <div class="top-row">
             <div class="field-wrap">
@@ -54,6 +54,21 @@
                 <input type="text"required autocomplete="off" name="apellidos" id="apellidos"/>
             </div>
           </div>
+              
+           <div class="field-wrap">
+            <label>
+              NIF<span class="req">*</span>
+            </label>
+              <input type="text"required autocomplete="off" name="nif" id="nif"/>
+          </div>
+              
+            <div class="field-wrap">
+            <label>
+              Direccion<span class="req">*</span>
+            </label>
+              <input type="text"required autocomplete="off" name="direccion" id="direccion"/>
+          </div> 
+              
 
           <div class="field-wrap">
             <label>
@@ -78,13 +93,13 @@
         <div id="login">   
           <h1>Bienvenido de nuevo</h1>
           
-          <form action="Autenticacion" method="post">
+          <form action="iniciar" method="post">
           
             <div class="field-wrap">
             <label>
               Correo<span class="req">*</span>
             </label>
-                <input type="email"required autocomplete="off" name="mail" id="mail" />
+                <input type="email"required autocomplete="off" name="correo" id="correo" />
           </div>
           
           <div class="field-wrap">
@@ -103,27 +118,26 @@
           
           
                   <div id="loginAdmin">   
-          <h1>Welcome Back!</h1>
+          <h1>Bienvenido Administrador</h1>
           
-          <form action="Autenticacion" method="post">
+          <form action="inicioAdm" method="post">
           
-            <div class="field-wrap">
+                <div class="field-wrap">
             <label>
-              Email Address<span class="req">*</span>
+              Correo<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off"/>
+                <input type="email"required autocomplete="off" name="correoadm" id="correoadm" />
           </div>
           
           <div class="field-wrap">
             <label>
-              Password<span class="req">*</span>
+              Contraseña<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off"/>
+              <input type="password"required autocomplete="off" name="passadm" id="passadm"/>
           </div>
           
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
           
-          <button class="button button-block"/>Log In</button>
+          <button class="button button-block"/>Entrar</button>
           
           </form>
 
