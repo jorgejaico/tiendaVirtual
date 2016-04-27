@@ -1,7 +1,4 @@
-<%-- 
-    Document   : index
 
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +18,7 @@
     
   </head>
 
-  <body background="img/bg.jpg">
+  <body background="images/bg.jpg">
 
     <div class="form">
       
@@ -44,14 +41,14 @@
               <label>
                 Nombre<span class="req">*</span>
               </label>
-                <input type="text" required autocomplete="off" name="nombre" id="nombre" />
+                <input type="text" required autocomplete="off" name="usu_nombre" id="nombre" />
             </div>
         
             <div class="field-wrap">
               <label>
                 Apellidos<span class="req">*</span>
               </label>
-                <input type="text"required autocomplete="off" name="apellidos" id="apellidos"/>
+                <input type="text"required autocomplete="off" name="usu_apellidos" id="apellidos"/>
             </div>
           </div>
               
@@ -59,14 +56,14 @@
             <label>
               NIF<span class="req">*</span>
             </label>
-              <input type="text"required autocomplete="off" name="nif" id="nif"/>
+              <input type="text"required autocomplete="off" name="usu_nif" id="nif"/>
           </div>
               
             <div class="field-wrap">
             <label>
               Direccion<span class="req">*</span>
             </label>
-              <input type="text"required autocomplete="off" name="direccion" id="direccion"/>
+              <input type="text"required autocomplete="off" name="usu_dire" id="direccion"/>
           </div> 
               
 
@@ -74,14 +71,14 @@
             <label>
               Correo<span class="req">*</span>
             </label>
-              <input type="email"required autocomplete="off" name="mail" id="mail"/>
+              <input type="email"required autocomplete="off" name="usu_mail" id="mail"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Contraseña<span class="req">*</span>
             </label>
-              <input type="password"required autocomplete="off" name="pass" id="pass"/>
+              <input type="password"required autocomplete="off" name="usu_pass" id="pass"/>
           </div>
           
           <button type="submit" class="button button-block"/>Registrarse</button>
@@ -99,14 +96,14 @@
             <label>
               Correo<span class="req">*</span>
             </label>
-                <input type="email"required autocomplete="off" name="correo" id="correo" />
+                <input type="email"required autocomplete="off" name="usu_mail" id="correo" />
           </div>
           
           <div class="field-wrap">
             <label>
               Contraseña<span class="req">*</span>
             </label>
-              <input type="password"required autocomplete="off" name="pass" id="pass"/>
+              <input type="password"required autocomplete="off" name="usu_pass" id="pass"/>
           </div>
           
           
@@ -120,20 +117,20 @@
                   <div id="loginAdmin">   
           <h1>Bienvenido Administrador</h1>
           
-          <form action="inicioAdm" method="post">
+          <form action="inicioadmin" method="post">
           
                 <div class="field-wrap">
             <label>
               Correo<span class="req">*</span>
             </label>
-                <input type="email"required autocomplete="off" name="correoadm" id="correoadm" />
+                <input type="email"required autocomplete="off" name="adm_mail" id="correoadm" />
           </div>
           
           <div class="field-wrap">
             <label>
               Contraseña<span class="req">*</span>
             </label>
-              <input type="password"required autocomplete="off" name="passadm" id="passadm"/>
+              <input type="password"required autocomplete="off" name="adm_pass" id="passadm"/>
           </div>
           
           

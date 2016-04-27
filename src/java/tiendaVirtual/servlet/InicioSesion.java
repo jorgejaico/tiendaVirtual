@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tiendaVirtual.servlet;
+package Tiendavirtual.servlet;
 
+import Tiendavirtual.modelo.Consultas;
+import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tiendaVirtual.modelo.Consultas;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author 93186.joan23
+ * @author Jorge
  */
+@WebServlet(name ="InicioSesion", urlPatterns = {"/iniciar"})
 public class InicioSesion extends HttpServlet {
 
     /**
@@ -36,16 +39,18 @@ public class InicioSesion extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-      
-        String correo = request.getParameter("correo");
-        String contraseña = request.getParameter("pass");
+        
+        String usu_mail = request.getParameter("usu_mail");
+        String usu_pass = request.getParameter("usu_pass");
         
         Consultas co = new Consultas();
-        
-        if(co.Autenticacion(correo, contraseña)){
-            response.sendRedirect("menu.jsp");
-        }else {
+        if (co.InicioSesion(usu_mail, usu_pass)) {
+            HttpSession sesion = request.getSession();
+            sesion.setAttribute("usu_mail",usu_mail);
+            response.sendRedirect("administracion.jsp");
+        } else {
             response.sendRedirect("index.jsp");
+
         }
     }
 
@@ -64,8 +69,9 @@ public class InicioSesion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**
@@ -82,7 +88,7 @@ public class InicioSesion extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

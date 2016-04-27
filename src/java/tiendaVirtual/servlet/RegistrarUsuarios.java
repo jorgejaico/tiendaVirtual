@@ -3,22 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tiendaVirtual.servlet;
+package Tiendavirtual.servlet;
 
+import Tiendavirtual.modelo.Consultas;
+import Tiendavirtual.modelo.Cliente;
+import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tiendaVirtual.modelo.Consultas;
 
 /**
  *
- * @author 93186.joan23
+ * @author Jorge
  */
-@WebServlet(name = "RegistrarUsuarios", urlPatterns = {"/nuevousuario"})
+@WebServlet(name ="RegistrarUsuarios", urlPatterns = {"/nuevousuario"})
 public class RegistrarUsuarios extends HttpServlet {
 
     /**
@@ -29,27 +33,37 @@ public class RegistrarUsuarios extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        String nombre = request.getParameter("nombre");
-        String apellidos = request.getParameter("apellidos");
-        String nif = request.getParameter("nif");
-        String direccion = request.getParameter("direccion");
-        String correo = request.getParameter("mail");
-        String contraseña = request.getParameter("pass");
+        String usu_nombre = request.getParameter("usu_nombre");
+        String usu_apellidos = request.getParameter("usu_apellidos");
+        String usu_nif = request.getParameter("usu_nif");
+        String usu_dire = request.getParameter("usu_dire");
+        String usu_mail = request.getParameter("usu_mail");
+        String usu_pass = request.getParameter("usu_pass");
+        
+        Cliente ai = new Cliente();
+        
+        ai.setUsu_nombre(usu_nombre);
+        ai.setUsu_apellidos(usu_apellidos);
+        ai.setUsu_nif(usu_nif);
+        ai.setUsu_dire(usu_dire);
+        ai.setUsu_mail(usu_mail);
+        ai.setUsu_pass(usu_pass);
         
         Consultas co = new Consultas();
-        
-        if(co.registrar(nombre, apellidos, nif, direccion, correo, contraseña)){
-            
-            response.sendRedirect("menu.jsp");
-        }else{
+        if (co.RegistrarUsuarios(ai)) {
+            response.sendRedirect("index.jsp");
+        } else {
             response.sendRedirect("index.jsp");
         }
+        
+        
         
         
     }
@@ -66,7 +80,11 @@ public class RegistrarUsuarios extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(RegistrarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,7 +98,11 @@ public class RegistrarUsuarios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(RegistrarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

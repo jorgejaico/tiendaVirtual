@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tiendaVirtual.servlet;
+package Tiendavirtual.servlet;
 
+import Tiendavirtual.modelo.Consultas;
+import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tiendaVirtual.modelo.Consultas;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author 93186.joan23
+ * @author Jorge
  */
+@WebServlet(name = "InicioSesionAdmin", urlPatterns = {"/inicioadmin"})
 public class InicioSesionAdmin extends HttpServlet {
 
     /**
@@ -30,23 +33,26 @@ public class InicioSesionAdmin extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-      
-        String correoadm = request.getParameter("correoadm");
-        String contraseñaadm = request.getParameter("passadm");
+        
+        String adm_mail = request.getParameter("adm_mail");
+        String adm_pass = request.getParameter("adm_pass");
         
         Consultas co = new Consultas();
-        
-        if(co.Autenticacion(correoadm, contraseñaadm)){
-            response.sendRedirect("menuAdmin.jsp");
-        }else {
+        if (co.InicioSesionAdmin(adm_mail, adm_pass)) {
+            //Creamos la sesion
+            HttpSession sesion = request.getSession();
+            //Guardamos la sesion del tipo STRING
+            sesion.setAttribute("adm_mail", adm_mail);
+            //Hacemos redireccion a la pagina principal
+            response.sendRedirect("administracionadmin.jsp");
+        } else{
             response.sendRedirect("index.jsp");
-        }
+        }  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +70,7 @@ public class InicioSesionAdmin extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesionAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,7 +88,7 @@ public class InicioSesionAdmin extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesionAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
